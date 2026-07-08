@@ -27,4 +27,4 @@ orjson>=3.9.0
 pydantic>=2.5.0
 html5lib>=1.1
 
-streamlit
+uvicorn[standard]>=0.30.0
