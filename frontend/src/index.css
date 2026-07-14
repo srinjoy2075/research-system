@@ -2,7 +2,7 @@
 
 @import "tailwindcss";
 
-:theme {
+@theme {
   --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   

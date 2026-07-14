@@ -110,4 +110,8 @@ def stream_research(task_id: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    is_prod = os.getenv("ENVIRONMENT") == "production" or os.getenv("PORT") is not None
+    host = "0.0.0.0" if is_prod else "127.0.0.1"
+    reload = not is_prod
+    uvicorn.run("server:app", host=host, port=port, reload=reload)

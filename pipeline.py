@@ -10,7 +10,17 @@ def run_research_pipeline(topic : str) -> dict:
     search_result = search_agent.invoke({
         "messages" : [("user", f"Find recent, reliable and detailed information about: {topic}")]
     })
-    state["search_results"] = search_result['messages'][-1].content
+    
+    tool_contents = []
+    for msg in search_result.get('messages', []):
+        if msg.__class__.__name__ == 'ToolMessage':
+            tool_contents.append(msg.content)
+            
+    if tool_contents:
+        state["search_results"] = "\n\n".join(tool_contents)
+    else:
+        state["search_results"] = search_result['messages'][-1].content
+        
     print("\n search result ",state['search_results'])
 
 
@@ -26,7 +36,16 @@ def run_research_pipeline(topic : str) -> dict:
             f"Search Results:\n{state['search_results'][:800]}"
         )]
     })
-    state['scraped_content'] = reader_result['messages'][-1].content
+    
+    reader_tool_contents = []
+    for msg in reader_result.get('messages', []):
+        if msg.__class__.__name__ == 'ToolMessage':
+            reader_tool_contents.append(msg.content)
+            
+    if reader_tool_contents:
+        state['scraped_content'] = "\n\n".join(reader_tool_contents)
+    else:
+        state['scraped_content'] = reader_result['messages'][-1].content
     print("\nscraped content: \n", state['scraped_content'])
 
 
