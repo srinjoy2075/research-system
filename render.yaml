@@ -21,7 +21,6 @@ staticSites:
     envVars:
       - key: VITE_API_URL
         sync: false
-        placeholder: "Enter the deployed backend URL (e.g., https://research-backend.onrender.com)"
     routes:
       - type: rewrite
         source: /*
