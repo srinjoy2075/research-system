@@ -13,9 +13,9 @@ services:
       - key: TAVILY_API_KEY
         sync: false
 
+staticSites:
   # React Frontend (Static Site)
-  - type: static
-    name: research-frontend
+  - name: research-frontend
     buildCommand: cd frontend && npm install && npm run build
     publishDir: frontend/dist
     envVars:
