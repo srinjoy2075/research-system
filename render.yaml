@@ -24,7 +24,7 @@ services:
         fromService:
           name: research-backend
           type: web
-          property: host
+          property: url
     routes:
       - type: rewrite
         source: /*
