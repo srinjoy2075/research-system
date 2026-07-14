@@ -14,17 +14,14 @@ services:
         sync: false
 
   # React Frontend (Static Site)
-  - type: web
+  - type: static
     name: research-frontend
-    env: static
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
+    publishDir: frontend/dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          name: research-backend
-          type: web
-          property: url
+        sync: false
+        placeholder: "Enter the deployed backend URL (e.g., https://research-backend.onrender.com)"
     routes:
       - type: rewrite
         source: /*
